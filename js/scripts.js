@@ -28,7 +28,7 @@ let cardRepository = (function () {
         let cardname = card.name;
         if (card.name.charAt(0) <= 'z' && card.name.charAt(0) >= 'a')
             cardname = card.name.charAt(0).toUpperCase() + card.name.slice(1);
-        let newElement = $('<li><button>' + cardname + '</button></li>');
+        let newElement = $('<li><button class="list-group-item list-group-item-action">' + cardname + '</button></li>');
         $('.the_list').append(newElement);
 
         newElement.on('click', function (event) {
@@ -82,7 +82,7 @@ let cardRepository = (function () {
 
     function loadImage(item) {
         let imgUrl = 'https://art.hearthstonejson.com/v1/render/latest/enUS/512x/' + item.id + '.png';
-        $('.img-container').html('<img id="the_image" alt="Photo of ' + item.name + '" onload="setTimeout(function () { $(\'#loading\').css(\'visibility\', \'hidden\'); $(\'#loading\').css(\'\', \'0\'); }, 100)" src="' + imgUrl + '" /><button id="getInfo" onclick="cardRepository.showDetails('+item.index+')";>click for details</button>');
+        $('.img_container').html('<img id="the_image" alt="Photo of ' + item.name + '" onload="setTimeout(function () { $(\'#loading\').css(\'visibility\', \'hidden\'); $(\'#loading\').css(\'\', \'0\'); }, 100)" src="' + imgUrl + '" /><button type="button" id="getInfo" class="btn btn-primary list-group-item list-group-item-action" data-toggle="modal" data-target="#cardModal" onclick="cardRepository.loadDetails(' + item.index +')">click here for details</button>');
     }
 
     return {
@@ -102,24 +102,32 @@ let modalClass = (function () {
     let modalContainer = $('#modalContainer');
 
     function showModal(cardObject) {
-        modalContainer.empty();
+        console.log(cardObject);
+
+        $('.modal-title').html($('<div id="modalName">'+ cardObject.name +'</div> <div id="modalFlavor">'+cardObject.flavor+'</div>'));
+
+        //modalContainer.empty();
         
-        let newModal = $('<div id="newModal" class="modal"><div id="modalName">'+ cardObject.name +'</div><div id="modalFlavor">'+cardObject.flavor+'</div></div>');
-        $('#newModal').addClass('modal');
+        //let newModal = $('<div id="newModal" class="modal"><div id="modalName">'+ cardObject.name +'</div><div id="modalFlavor">'+cardObject.flavor+'</div></div>');
+        //$('#newModal').addClass('modal');
 
-        let newModalClose = $('<button id="newModalClose">Close</button>');
-        $('#newModalClose').addClass('modal-close');
 
-        modalContainer.append(newModal);
-        modalContainer.append(newModalClose);
+
+        //let newModalClose = $('<button id="newModalClose">Close</button>');
+        //$('#newModalClose').addClass('modal-close');
+
+        //modalContainer.append(newModal);
+        //modalContainer.append(newModalClose);
+
+        $('.modal-body').empty();
 
         $.each(cardObject, function (i) {
             let newElement = $('<div id="modal_' + i + '" class="modal_info"><span class="keys">' + i + ":</span> " + cardObject[i] + '</div>');
             if (i != 'name' && i != 'flavor' && i!= 'playRequirements')
-                $('#newModal').append(newElement);
+                $('.modal-body').append(newElement);
         });
 
-        modalContainer.addClass('is-visible');
+        //modalContainer.addClass('is-visible');
 
     }
 

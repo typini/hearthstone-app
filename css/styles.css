@@ -63,31 +63,35 @@ button {
     white-space: nowrap;
 }
 
-    button:hover {
-        border: 6px solid #ff2000;
-        border-bottom: 2px solid #ff2000;
-        border-right: 4px solid #ff2000;
-        background-color: #f2e67d;
-        background-color: rgba(255, 32, 0, 0.2);
-    }
 
-    button:focus {
-        outline: 0 !important;
-        background-color: #333;
-        background-color: rgba(255, 32, 0, 0.45);
-    }
+/*
+button:hover {
+    /*border: 6px solid #ff2000;
+    border-bottom: 2px solid #ff2000;
+    border-right: 4px solid #ff2000;
+    background-color: #f2e67d;
+    background-color: rgba(255, 32, 0, 0.2);
+}
+*/
 
+/*button:focus {
+    outline: 0 !important;
+    background-color: #333;
+    background-color: rgba(255, 32, 0, 0.45);
+}*/
 
 span {
     color: blue;
     padding: 20px;
 }
 
+/*
 li:hover {
     text-decoration: underline;
     text-decoration-style: solid;
     text-decoration-color: #ff2000;
 }
+*/
 
 ul {
     width: 100%;
@@ -159,15 +163,8 @@ ul {
 .modal {
     font-family: 'Walter Turncoat', serif;
     margin: auto;
-    display: inline-block;
     box-sizing: border-box;
-    background: #fff;
-    padding: 15px;
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 14px;
-    font-size: 0.5em;
     line-height: 1.2em;
 }
 
@@ -186,7 +183,8 @@ ul {
 }
 
 .keys {
-    font-size: 0.6em;
+    font-size: 1.1em;
+    line-height: 2em;
     font-weight: 500;
     padding: 3px;
     background-color: #111;
@@ -197,7 +195,7 @@ ul {
 .modal_info {
     text-align: left;
     width: 100%;
-    font-size: 0.9em;
+    font-size: 1.05em;
     text-overflow: clip;
     word-wrap: break-word;
 }
@@ -247,7 +245,7 @@ ul {
     line-height: 1.9em;
 }
 
-.img-container {
+.img_container {
     width: 100%;
     background-color: #111;
     text-align: center;
