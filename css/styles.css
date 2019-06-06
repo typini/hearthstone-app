@@ -13,10 +13,7 @@ body {
 }
 
 header {
-    max-width: 700px;
-    min-width: 360px;
-    margin: auto;
-    padding: 3px 10px;
+    margin: 12px 0;
 }
 
 footer {
@@ -31,7 +28,7 @@ footer {
 
 h1 {
     font-family: 'Kaushan Script', serif;
-    font-size: 2.5em;
+    font-size: 1.6em;
     display: inline;
     color: #f8e9f9;
     text-shadow: -4px 3px 2px #333;
@@ -63,41 +60,16 @@ button {
     white-space: nowrap;
 }
 
-
-/*
-button:hover {
-    /*border: 6px solid #ff2000;
-    border-bottom: 2px solid #ff2000;
-    border-right: 4px solid #ff2000;
-    background-color: #f2e67d;
-    background-color: rgba(255, 32, 0, 0.2);
-}
-*/
-
-/*button:focus {
-    outline: 0 !important;
-    background-color: #333;
-    background-color: rgba(255, 32, 0, 0.45);
-}*/
-
 span {
     color: blue;
     padding: 20px;
 }
 
-/*
-li:hover {
-    text-decoration: underline;
-    text-decoration-style: solid;
-    text-decoration-color: #ff2000;
-}
-*/
 
 ul {
-    width: 100%;
     white-space: nowrap;
     list-style-type: none;
-    background-color: #444;
+    background-color: #d03f3f;
     border-radius: 25px;
     margin: 0;
 }
@@ -218,7 +190,8 @@ ul {
     overflow-y: scroll;
     max-height: 65vh;
     width: 100%;
-    border-left: 3px solid #525252;
+    border-left: 3px solid #ff3d3d;
+    padding-left: 0;
 }
 
 .header-container {
@@ -227,22 +200,20 @@ ul {
     margin-bottom: 20px;
 }
 
-.header-contents {
-    background-image: radial-gradient(circle, #b900ff 1%, #0d670d 25%, #72ccd2 52%, #4e004e 62%, #b91515 64%, #333 70%);
-    animation: glow 0.3s ease infinite alternate;
+.navbar {
+    align-items: flex-start;
 }
 
-.header-contents img {
-    height: 80px;
-    border: 5px solid #bb1818;
-    border-radius: 50%;
+.navbar-brand {
+    font-size: 1.6em;
 }
 
-.header-contents h1 {
-    vertical-align: top;
-    padding: 20px;
-    font-size: 3em;
-    line-height: 1.9em;
+.navbar-nav {
+    padding-left: 20px;
+    position: absolute;
+    line-height: 1.35em;
+    top: 10px;
+    right: 20px;
 }
 
 .img_container {
@@ -252,6 +223,8 @@ ul {
     border-radius: 25px;
     overflow: hidden;
     border-left: 3px solid #383838;
+    font-size: 1.4em;
+    color: #98ff92;
 }
 
 #getInfo {
@@ -264,14 +237,10 @@ ul {
     width: auto;
     max-height: 59.5vh;
     margin: auto;
+    margin-top: -30px;
 }
 
-@keyframes glow {
-    0%      {background-image: radial-gradient(circle, #b70eff 1%, #0d670d 25%, #72cdd4 52%, #4e004e 62%, #b91515 64%, #333 70%);}
-    100%    {background-image: radial-gradient(circle, #b900ff 1%, #0d670d 25%, #72ccd2 52%, #4e004e 62%, #b91515 64%, #333 70%);}
-}
-
-@media only screen and (max-width: 740px){
+@media only screen and (max-width: 700px) {
     .grid1 {
         grid-template-columns: 1fr;
     }
@@ -281,32 +250,39 @@ ul {
         max-height: 20vh;
     }
 
-    #the_image{
-        max-height: 44vh;
+    #the_image {
+        max-height: 64vh;
         width: auto;
     }
+}
 
-    .header-contents img {
-        height: 50px;
-        border-width: 3px;
+
+@media only screen and (max-width: 575px) {
+
+    .navbar-nav {
+        position: relative;
+        right: 0px;
+    }
+
+    header {
+        margin: 3px 0;
     }
 
     .header-contents h1 {
-        font-size: 1.8em;
+        font-size: 1.7em;
     }
 
     button {
         font-size: 1.1em;
     }
-}
 
-@media only screen and (max-width: 420px){
-    .header-contents img {
+    #title {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+    }
+
+    #subtitle {
         display: none;
     }
-
-    .header-contents h1 {
-        font-size: 1.4em;
-    }
-
 }

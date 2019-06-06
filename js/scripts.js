@@ -42,12 +42,6 @@ let cardRepository = (function () {
         loadImage(card);
     }
 
-    function showDetails(index) {
-        $("#loading").css("visibility", "visible");
-        $("#loading").css("opacity", "0.7");
-        loadDetails(index);
-    }
-
     function getAll() {
         return carddex;
     }
@@ -70,92 +64,44 @@ let cardRepository = (function () {
         });
     }
 
-
     function loadDetails(item) {
-
         let detailedObject = $.ajax(apiUrl, { dataType: 'json' }).then(function (response) {
-            modalClass.showModal(response[item]);
+            showModal(response[item]);
             setTimeout(function () { document.getElementById("loading").style.visibility = "hidden"; }, 50);
         });
-
     }
 
     function loadImage(item) {
         let imgUrl = 'https://art.hearthstonejson.com/v1/render/latest/enUS/512x/' + item.id + '.png';
-        $('.img_container').html('<img id="the_image" alt="Photo of ' + item.name + '" onload="setTimeout(function () { $(\'#loading\').css(\'visibility\', \'hidden\'); $(\'#loading\').css(\'\', \'0\'); }, 100)" src="' + imgUrl + '" /><button type="button" id="getInfo" class="btn btn-primary list-group-item list-group-item-action" data-toggle="modal" data-target="#cardModal" onclick="cardRepository.loadDetails(' + item.index +')">click here for details</button>');
+        let imgElement = $('<img id="the_image" alt="Photo of ' + item.name + '" onload="setTimeout(function () { $(\'#loading\').css(\'visibility\', \'hidden\');}, 100)" src="' + imgUrl + '" />');
+        let buttonElement = $('<button type="button" id="getInfo" class="btn btn-primary list-group-item list-group-item-action" data-toggle="modal" data-target="#cardModal" onclick="cardRepository.loadDetails(' + item.index + ')">click here for details</button>');
+        $('.img_container').empty();
+        $('.img_container').append(imgElement);
+        $('.img_container').append(buttonElement);
     }
 
-    return {
-        add: add,
-        addListItem: addListItem,
-        getAll: getAll,
-        showDetails: showDetails,
-        showImage: showImage,
-        loadList: loadList,
-        loadDetails: loadDetails,
-        loadImage: loadImage
-    };
-})();
-
-//Modal IIFE
-let modalClass = (function () {
-    let modalContainer = $('#modalContainer');
-
     function showModal(cardObject) {
-        console.log(cardObject);
-
-        $('.modal-title').html($('<div id="modalName">'+ cardObject.name +'</div> <div id="modalFlavor">'+cardObject.flavor+'</div>'));
-
-        //modalContainer.empty();
-        
-        //let newModal = $('<div id="newModal" class="modal"><div id="modalName">'+ cardObject.name +'</div><div id="modalFlavor">'+cardObject.flavor+'</div></div>');
-        //$('#newModal').addClass('modal');
-
-
-
-        //let newModalClose = $('<button id="newModalClose">Close</button>');
-        //$('#newModalClose').addClass('modal-close');
-
-        //modalContainer.append(newModal);
-        //modalContainer.append(newModalClose);
-
+        $('.modal-title').html($('<div id="modalName">' + cardObject.name + '</div> <div id="modalFlavor">' + cardObject.flavor + '</div>'));
         $('.modal-body').empty();
 
         $.each(cardObject, function (i) {
             let newElement = $('<div id="modal_' + i + '" class="modal_info"><span class="keys">' + i + ":</span> " + cardObject[i] + '</div>');
-            if (i != 'name' && i != 'flavor' && i!= 'playRequirements')
+            if (i != 'name' && i != 'flavor' && i != 'playRequirements')
                 $('.modal-body').append(newElement);
         });
-
-        //modalContainer.addClass('is-visible');
-
     }
-
-    function hideModal() {
-        modalContainer.removeClass('is-visible');
-    }
-
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalContainer.hasClass('is-visible')) {
-            hideModal();
-        }
-    });
-
-    modalContainer.on('click', (e) => {
-        let t = e.target;
-        if (t.id === 'modalContainer' || t.id === 'newModalClose') {
-            hideModal();
-        }
-    });
-
 
     return {
-        showModal: showModal,
-        hideModal: hideModal
-    }
-
+        add,
+        addListItem,
+        getAll,
+        showImage,
+        loadList,
+        loadDetails,
+        loadImage,
+        showModal
+    };
 })();
-
 
 cardRepository.loadList().then(function () {
     cardRepository.getAll().forEach(function (card) {
